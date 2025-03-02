@@ -1,19 +1,25 @@
 package com.api.book.bootrestbook.entities;
 
-import org.springframework.boot.autoconfigure.domain.EntityScan;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
 
-@EntityScan
+@Entity
 public class Book {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-    private String name;
+    private String title;
     private String author;
 
-    public Book() {
+    public Book(){
+        
     }
 
-    public Book(int id, String name, String author) {
+    public Book(int id, String title, String author) {
         this.id = id;
-        this.name = name;
+        this.title = title;
         this.author = author;
     }
 
@@ -25,12 +31,12 @@ public class Book {
         this.id = id;
     }
 
-    public String getName() {
-        return name;
+    public String getTitle() {
+        return title;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setTitle(String title) {
+        this.title = title;
     }
 
     public String getAuthor() {
@@ -43,7 +49,7 @@ public class Book {
 
     @Override
     public String toString() {
-        return "Book [id=" + id + ", name=" + name + ", author=" + author + "]";
+        return "Book [id=" + id + ", title=" + title + ", author=" + author + "]";
     }
 
     
