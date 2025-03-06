@@ -3,12 +3,16 @@ package com.api.book.bootrestbook.services;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.orm.ObjectOptimisticLockingFailureException;
+import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
 import com.api.book.bootrestbook.dao.BookRepository;
 import com.api.book.bootrestbook.entities.Book;
 
-@Service
+import jakarta.transaction.Transactional;
+
+@Component
 public class BookServices {
 
     @Autowired
@@ -48,11 +52,12 @@ public class BookServices {
     public Book addBook(Book b){
         // list.add(b);
         // return b;
-
-
-        Book result=bookRepository.save(b);
+        Book result = bookRepository.save(b);
         return result;
     }
+
+
+
 
     //deleting book
     public void deleteBook(int id){
@@ -70,7 +75,7 @@ public class BookServices {
             this.bookRepository.deleteById(id);
     }
 
-    //updating book
+//    //updating book
     public void updateBook(Book book, int id){
         // list = list.stream().map(b -> {
         //     if(b.getId()==id){
@@ -81,6 +86,21 @@ public class BookServices {
         // }).collect(Collectors.toList());
 
         book.setId(id);
+        // bookRepository.saveAndFlush(book);
         bookRepository.save(book);
     }
+
+
+
+
+//    @Transactional
+//    public Book updateBook(Book book, int id) {
+//        Book existingBook = bookRepository.findById(id);
+//
+//        existingBook.setTitle(book.getTitle());
+//        existingBook.setAuthor(book.getAuthor());
+//
+//        return bookRepository.save(existingBook);
+//    }
+
 }

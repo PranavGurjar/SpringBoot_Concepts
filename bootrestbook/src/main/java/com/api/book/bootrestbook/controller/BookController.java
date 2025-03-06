@@ -33,7 +33,7 @@ public class BookController {
         return ResponseEntity.status(HttpStatus.CREATED).body(list);
     }
 
-    @GetMapping("/book/{id}")
+    @GetMapping("/books/{id}")
     public ResponseEntity<Book> getBook(@PathVariable("id") int id){
         Book book = this.bookServices.getBookById(id);
         if (book==null) {
@@ -48,7 +48,9 @@ public class BookController {
         try{
             b = this.bookServices.addBook(book);
             System.out.println(book);
-            return ResponseEntity.ok(b);
+             return ResponseEntity.ok(b);
+//            return ResponseEntity.status(HttpStatus.CREATED).body(b);
+
         }catch(Exception e){
             e.printStackTrace();
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
